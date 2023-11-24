@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de usuario</title>
+    <style>
+        span{
+            color: red;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            gap:10px;
+            
+        }
+        .boton{
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registro de Usuario</h1>
+    <form action="" method="">
+    <div>
+        <label for="nombre">Nombre<span>*</span></label>
+        <input type="text" name="nombre" id="">
+    </div>
+    <div>
+        <label for="apellidos">Apellidos<span>*</span></label>
+        <input type="text" name="apellidos" id="">
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="text" name="email" id="">
+    </div>
+    <div>
+        <label for="dni">DNI<span>*</span></label>
+        <input type="text" name="dni" id="">
+    </div>
+    <div>
+        <label for="username">Username<span>*</span></label>
+        <input type="text" name="username" id="">
+    </div>
+    <div>
+        <label for="contrasena">Contraseña<span>*</span></label>
+        <input type="text" name="contrasena" id="">
+    </div>
+    <div>
+        <label for="repetirContrasena">Repetir Contraseña<span>*</span></label>
+        <input type="text" name="repetirContrasena" id="">
+    </div>
+    <div>
+        <label for="recibirAvisos">Deseas recibir avisos comerciales?</label>
+        <input type="checkbox" name="recibirAvisos" id="">
+    </div>
+        <p>Los campos con <span>*</span> son obligatorios</p>
+        <input type="submit" value="Registrarse" class="boton">
+    </form>
+</body>
+</html>
