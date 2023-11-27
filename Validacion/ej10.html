@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de usuario</title>
+    <link rel="stylesheet" href="ej10.css">
+    <script src="ej10.js"></script>
     <style>
         span{
             color: red;
@@ -22,38 +24,46 @@
 </head>
 <body>
     <h1>Registro de Usuario</h1>
-    <form action="" method="">
+    <form action="prueba.html">
     <div>
         <label for="nombre">Nombre<span>*</span></label>
-        <input type="text" name="nombre" id="">
+        <input type="text" name="nombre" id="nombre">
+        <span id="spanNombre"></span>
     </div>
     <div>
         <label for="apellidos">Apellidos<span>*</span></label>
-        <input type="text" name="apellidos" id="">
+        <input type="text" name="apellidos" id="apellidos">
+        <span id="spanApellido"></span>
     </div>
     <div>
         <label for="email">Email</label>
-        <input type="text" name="email" id="">
+        <input type="text" name="email" id="email">
+        <span id=""></span>
     </div>
     <div>
         <label for="dni">DNI<span>*</span></label>
-        <input type="text" name="dni" id="">
+        <input type="text" name="dni" id="dni">
+        <span id="spanDni"></span>
     </div>
     <div>
         <label for="username">Username<span>*</span></label>
         <input type="text" name="username" id="">
+        <span id=""></span>
     </div>
     <div>
         <label for="contrasena">Contraseña<span>*</span></label>
         <input type="text" name="contrasena" id="">
+        <span id=""></span>
     </div>
     <div>
         <label for="repetirContrasena">Repetir Contraseña<span>*</span></label>
         <input type="text" name="repetirContrasena" id="">
+        <span id=""></span>
     </div>
     <div>
         <label for="recibirAvisos">Deseas recibir avisos comerciales?</label>
         <input type="checkbox" name="recibirAvisos" id="">
+        <span id=""></span>
     </div>
         <p>Los campos con <span>*</span> son obligatorios</p>
         <input type="submit" value="Registrarse" class="boton">
