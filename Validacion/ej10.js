@@ -49,7 +49,7 @@ function validaApellido(e) {
     spanApellido.classList.remove("invalido");
     let palabras=inputApellido.value.split(" ");
     let palabrasMayuscula = palabras.map((palabra)=> {
-      return palabra.charAt(0).toUpperCase() + palabra.slice(1);
+      return palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();
   });
     let fraseFormateada = palabrasMayuscula.join(' ');
     inputApellido.value=fraseFormateada;
@@ -87,7 +87,7 @@ function compruebaLetra(dni) {
   const numero = dni.slice(0, 8);
   const letra=dni.slice(8);
   let resultado=numero%23;
-  if(letras[resultado]!=letra)
+  if(letras[resultado]!=letra.toLowerCase())
     return false;
   else
     return true;
@@ -98,7 +98,7 @@ function rellenaUsername(e) {
   if(inputUserName.value==""){
     const inputNombre=document.getElementById("nombre").value.charAt(0);
     const inputApellidos=document.getElementById("apellidos").value.replace(" ","");
-    const userName=inputNombre.charAt(0).toLowerCase()+inputApellidos.replace(" ","").toLowerCase();
+    const userName=inputNombre.charAt(0).toLowerCase()+inputApellidos.toLowerCase();
     document.getElementById("userName").value=userName;
     console.log(inputNombre);
     console.log(inputApellidos.replace(" ",""));
