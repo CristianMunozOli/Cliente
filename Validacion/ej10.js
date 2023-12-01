@@ -85,7 +85,7 @@ function validaDni(e){
 function compruebaLetra(dni) {
   let letras=["t","r","w","a","g","m","y","f","p","d","x","b","n","j","z","s","q","v","h","l","c","k","e"];
   const numero = dni.slice(0, 8);
-  const letra=dni.slice(8);
+  const letra=dni.slice(8,9);
   let resultado=numero%23;
   if(letras[resultado]!=letra.toLowerCase())
     return false;
