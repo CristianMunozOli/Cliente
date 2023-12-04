@@ -13,18 +13,19 @@ function anadeLista() {
     div.append(nuevaLista);
     const main = document.querySelector('main');
     main.append(div);
-    crearBotonAnadir(div);
-    borrarLista(div);
+    crearBotonAnadirTarea(div);
+    crearBorrarBotonLista();
 
 }
 
-function crearBotonAnadir(contenedor) {
+function crearBotonAnadirTarea(contenedor) {
     const botonAnadirTarea = document.createElement('button');
     botonAnadirTarea.textContent = "Añadir tarea";
-    botonAnadirTarea.addEventListener('mousedown',() =>{
+    
+    botonAnadirTarea.addEventListener('mousedown',(e) =>{
         
         //Crear botones para añadir antes, añadir después y borrar la tarea
-           crearBotones(contenedor);
+           crearBotones(e);
         
        /* const botonAnadirTareaDespues = document.createElement('button');
         botonAnadirTareaDespues.textContent = "Añadir Despues";
@@ -38,39 +39,43 @@ function crearBotonAnadir(contenedor) {
         });*/
        
     });
-    const div =contenedor;
-    div.append(botonAnadirTarea);
+    const div = document.querySelectorAll('div');
+    div[div.length-1].append(botonAnadirTarea);
 }
-function borrarLista(lista) {
+function crearBorrarBotonLista() {
     const botonBorrar = document.createElement('button');
     botonBorrar.textContent = "Borrar Lista";
     const div = document.querySelectorAll('div');
     div[div.length-1].append(botonBorrar);
-    botonBorrar.addEventListener('mousedown', () => {
-        lista.remove();
-        botonBorrar.remove();
+    botonBorrar.addEventListener('mousedown', (e) => {
+        console.log(e.target.parentElement);
+        e.target.parentElement.remove();
     });
 }
+
 function crearBotones(contenedor) {
     const nombreTarea = prompt('Introduce el nombre de la tarea:');
     const nuevaTarea = document.createElement('li');
     nuevaTarea.textContent = nombreTarea;
     const botonAnadirTareaAntes = document.createElement('button');
-        botonAnadirTareaAntes.textContent = "Añadir Antes";
-        botonAnadirTareaAntes.addEventListener('mousedown',() =>{
-            crearBotones(contenedor);
-        });  
-        const siguienteElemento = nuevaTarea.nextSibling;
-        const ul = contenedor.querySelector('ul');
-         // Insertar la nueva tarea después del elemento siguiente (o al final si es null)
-         if (siguienteElemento) {
-            ul.insertBefore(nuevaTarea, siguienteElemento);
-            ul.append(botonAnadirTareaAntes); 
-        } else {
-            ul.append(nuevaTarea);
-            ul.append(botonAnadirTareaAntes); 
-        }
-       
-       // ul.append(nuevaTarea);
-       // ul.append(botonAnadirTareaAntes);     
+    botonAnadirTareaAntes.textContent = "Añadir Antes";
+    botonAnadirTareaAntes.addEventListener('mousedown',() =>{
+        crearBotones(contenedor);
+        });   
+    
+    const siguienteElemento = nuevaTarea.nextSibling;
+    const ul = contenedor.querySelector('ul');
+    console.log(siguienteElemento)
+    console.log(nuevaTarea)
+    if (siguienteElemento) {
+        //console.log("1");
+        ul.insertBefore(nuevaTarea, siguienteElemento);
+        ul.append(botonAnadirTareaAntes); 
+    } else {
+        //console.log("2");
+        ul.append(nuevaTarea);
+        ul.append(botonAnadirTareaAntes); 
+    }
+    // ul.append(nuevaTarea);
+    // ul.append(botonAnadirTareaAntes);     
 }
