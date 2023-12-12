@@ -1,4 +1,4 @@
-const URL_SERVER ="http://IP dE tu SERVIDOR:3000/";
+const URL_SERVER ="http://18.234.238.42:3000";
 document.addEventListener("DOMContentLoaded",cargarListas,{once:true})
 
 function pintarListas(listas){
@@ -30,11 +30,36 @@ function pintarListas(listas){
 }
 
 function cargarListas(){
-
+    fetch(`${URL_SERVER}/listas`)
+    .then(response => {
+        if (response.ok)
+            return response.json();
+        else
+            throw new Error(response.status);
+    },err => {
+        console.error("ERROR: ", err.message)
+    })
+    .then(data => {
+        pintarListas(data)
+        console.log("Datos: " + data);
+    })
+    .catch(err => {
+        console.error("ERROR: ", err.message)
+    });
 }
 
 function añadirListaNueva(){
-
+    const nombreLista=prompt("Nombre de la lista");
+    // Declaración de una variable de objeto
+    const jsonData={nombreLista, tarea:[]}
+    const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(jsonData)
+      };
+    
 }
 
 function borrarListaServidor(){
