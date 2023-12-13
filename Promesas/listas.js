@@ -1,4 +1,4 @@
-const URL_SERVER ="http://18.234.238.42:3000";
+const URL_SERVER ="http://54.204.61.101:3000";
 document.addEventListener("DOMContentLoaded",cargarListas,{once:true})
 
 function pintarListas(listas){
@@ -36,15 +36,15 @@ function cargarListas(){
             return response.json();
         else
             throw new Error(response.status);
-    },err => {
-        console.error("ERROR: ", err.message)
     })
     .then(data => {
-        pintarListas(data)
+        pintarListas(data);
         console.log("Datos: " + data);
     })
     .catch(err => {
+        const e=document.querySelector('main')
         console.error("ERROR: ", err.message)
+        e.innerHTML="ERROR: Fallo de conexión"+ err.message
     });
 }
 
