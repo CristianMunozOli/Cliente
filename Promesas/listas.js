@@ -1,4 +1,4 @@
-const URL_SERVER ="http://54.167.69.132:3000";
+const URL_SERVER ="http://54.198.173.137:3000";
 document.addEventListener("DOMContentLoaded",cargarListas,{once:true})
 
 function pintarListas(listas){
@@ -65,19 +65,21 @@ function añadirListaNueva(){
       };
       fetch(`${URL_SERVER}/listas`,options)
       .then((res) => res.json())
+      .then(data => pintarListas([data]))
         .catch((error) => console.error("Error:", error))     
 }
 
-function borrarListaServidor(){
-    const nombreLista=prompt("Nombre de la lista a borrar");
+function borrarListaServidor(e){
+    console.log(e);
+    const id= e.target.parentNode.querySelector("ol").id;
+    console.log("el id: "+id)
     const options = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({nombreLista})
       };
-      fetch(`${URL_SERVER}/listas`, options)
+      fetch(`${URL_SERVER}/listas/${id}`, options)
         .then((res) => {
             if (res.ok) {
                 console.log("Lista borrada con éxito");
