@@ -66,7 +66,7 @@ function añadirListaNueva(){
       fetch(`${URL_SERVER}/listas`,options)
       .then((res) => res.json())
       .then(data => pintarListas([data]))
-        .catch((error) => console.error("Error:", error))     
+        .catch((error) => console.error("Error:", error));   
 }
 
 function borrarListaServidor(e){
