@@ -1,4 +1,4 @@
-const URL_SERVER ="http://54.198.173.137:3000";
+const URL_SERVER ="http://54.85.200.146:3000";
 document.addEventListener("DOMContentLoaded",cargarListas,{once:true})
 
 function pintarListas(listas){
@@ -83,43 +83,87 @@ function borrarListaServidor(e){
         .then((res) => {
             if (res.ok) {
                 console.log("Lista borrada con éxito");
+                cargarListas();
+                location.reload(); 
             } else {
                 console.error("Error al borrar la lista:", res.statusText);
             }
         })
         .catch((error) => console.error("Error:", error));
 }
-function añadirTarea(){
-    
-    const nombreLista = prompt("Nombre de la lista a la que añadir la tarea");
+function añadirTarea(e){ 
+    const id= e.target.parentNode.querySelector("ol").id;
+    const nombreLista= e.target.parentNode.querySelector("h2").innerText;
+    console.log("Nombreeee: "+nombreLista)
+    const tareasViejas= e.target.parentNode.querySelectorAll("li");
+    let tareas=[];
+    tareasViejas.forEach(element => {
+        console.log(element.textContent)
+        tareas.push(element.textContent);
+    });
     const nuevaTarea = prompt("Nombre de la nueva tarea");
-
+    tareas.push(nuevaTarea);
     // Declaración de una variable de objeto
-    const jsonData = { tarea: nuevaTarea }; // ajustado para la estructura de tu JSON
+    const jsonData = {nombreLista,tareas}; // ajustado para el JSON
 
     const options = {
-        method: "POST",
+        method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(jsonData)
     };
 
-    fetch(`${URL_SERVER}/listas`, options)
+    fetch(`${URL_SERVER}/listas/${id}`, options)
         .then((res) => {
             if (res.ok) {
-                console.log(`Tarea "${nuevaTarea}" añadida a la lista "${nombreLista}" con éxito`);
+                console.log(`Tarea "${nuevaTarea}" añadida a la lista  con éxito`);
                 return res.json();
             } else {
                 throw new Error(`Error al añadir tarea a la lista: ${res.statusText}`);
             }
         })
         .then(data => {
+            console.log("eee "+[data])
+            //pintarListas([data]);
+            location.reload(); 
             console.log("Respuesta del servidor:", data);
         })
         .catch((error) => console.error("Error:", error));
 }
 
-function eliminarTarea(){
-
+function eliminarTarea(e){
+    const id= e.target.parentNode.querySelector("ol").id;
+    const nombreLista= e.target.parentNode.querySelector("h2").innerText;
+    console.log("Nombreeee2222: "+nombreLista)
+    const tareasViejas= e.target.parentNode.querySelectorAll("li");
+    let tareas=[];
+    tareasViejas.forEach(element => {
+        console.log(element.textContent)
+        tareas.push(element.textContent);
+    });
+    const tarea = parseInt(prompt("Numero de la tarea a borrar"));
+    tareas.splice(tarea-1,1);
+    const jsonData = {nombreLista,tareas};
+    const options = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(jsonData)
+    };
+    fetch(`${URL_SERVER}/listas/${id}`, options)
+    .then((res) => {
+        if (res.ok) {
+            console.log(`Tarea eliminada de la lista  con éxito`);
+            return res.json();
+        } else {
+            throw new Error(`Error al añadir tarea a la lista: ${res.statusText}`);
+        }
+    })
+    .then(data => {
+        location.reload(); 
+        console.log("Respuesta del servidor:", data);
+    })
+    .catch((error) => console.error("Error:", error));
 }
