@@ -1,4 +1,4 @@
-const URL_SERVER ="http://54.85.200.146:3000";
+const URL_SERVER ="http://54.167.87.217:3000";
 document.addEventListener("DOMContentLoaded",cargarListas,{once:true})
 
 function pintarListas(listas){
@@ -39,10 +39,11 @@ function cargarListas(){
             throw new Error(response.status);
     })
     .then(data => {
-        const botonAddLista=document.createElement("button");
-        botonAddLista.innerHTML="Añadir lista";
-        botonAddLista.addEventListener("click",añadirListaNueva);
-        e.append(botonAddLista);
+       /*  const botonAddLista=document.createElement("button");
+        botonAddLista.innerHTML="Añadir lista"; */
+        document.querySelector("main").innerHTML="<button id='addLista'>Añadir Lista</button>";
+        document.getElementById("addLista").addEventListener("click",añadirListaNueva);
+        /* e.append(botonAddLista); */
         pintarListas(data);
         console.log("Datos: " + data);
     })
@@ -65,7 +66,7 @@ function añadirListaNueva(){
       };
       fetch(`${URL_SERVER}/listas`,options)
       .then((res) => res.json())
-      .then(data => pintarListas([data]))
+      .then(data => pintarListas(data))
         .catch((error) => console.error("Error:", error));   
 }
 
@@ -84,7 +85,7 @@ function borrarListaServidor(e){
             if (res.ok) {
                 console.log("Lista borrada con éxito");
                 cargarListas();
-                location.reload(); 
+                
             } else {
                 console.error("Error al borrar la lista:", res.statusText);
             }
@@ -125,8 +126,7 @@ function añadirTarea(e){
         })
         .then(data => {
             console.log("eee "+[data])
-            //pintarListas([data]);
-            location.reload(); 
+            cargarListas();
             console.log("Respuesta del servidor:", data);
         })
         .catch((error) => console.error("Error:", error));
@@ -162,7 +162,7 @@ function eliminarTarea(e){
         }
     })
     .then(data => {
-        location.reload(); 
+        cargarListas(); 
         console.log("Respuesta del servidor:", data);
     })
     .catch((error) => console.error("Error:", error));
